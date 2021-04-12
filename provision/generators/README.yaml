@@ -1,0 +1,67 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: build-tools
+
+email:
+  support: support@hadenlabs.com
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: 'LGPL-3.0'
+
+# Canonical GitHub repo
+github_repo: hadenlabs/build-tools
+
+# Badges to display
+badges:
+  - name: GitHub tag (latest SemVer)
+    image: https://img.shields.io/github/v/tag/hadenlabs/build-tools.svg?label=latest&sort=semver
+    url: https://github.com/hadenlabs/build-tools/releases
+  - name: Lint
+    image: https://github.com/hadenlabs/build-tools/actions/workflows/lint.yml/badge.svg?branch=develop
+    url: https://github.com/hadenlabs/build-tools/actions
+  - name: Issues
+    image: https://img.shields.io/github/issues/hadenlabs/build-tools.svg
+    url: https://github.com/hadenlabs/build-tools/issues
+  - name: Latest Release
+    image: https://img.shields.io/github/release/hadenlabs/build-tools.svg
+    url: https://github.com/hadenlabs/build-tools/releases
+  - name: Beacon
+    image: https://ga-beacon.appspot.com/G-MZEK48EGE8/build-tools/readme
+    url: https://github.com/hadenlabs/build-tools
+
+# Short description of this project
+description: |-
+  build-tools for hadenlabs.
+
+requirements: |-
+
+  This is a list of applications that need to be installed previously to enjoy all the goodies of this configuration:
+
+  - [Pyenv](https://github.com/pyenv/pyenv)
+  - [Docker](https://www.docker.com/)
+  - [Tfenv](https://github.com/tfutils/tfenv)
+  - [Terragrunt](https://github.com/gruntwork-io/terragrunt)
+  - [terraform-docs](https://github.com/segmentio/terraform-docs)
+
+  or
+
+  - [zsh-pyenv](https://github.com/luismayta/zsh-pyenv)
+  - [zsh-docker](https://github.com/luismayta/zsh-docker)
+  - [zsh-tfenv](https://github.com/luismayta/zsh-tfenv)
+
+# How to use this project
+usage: |-
+  ```bash
+
+  ```
+
+examples:
+  - 'docs/examples/common.md'
