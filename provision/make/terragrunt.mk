@@ -43,7 +43,7 @@ terragrunt.setup: terragrunt.validate
 .PHONY: terragrunt.setup
 
 terragrunt.environment:
-	@echo "----> setup terragrunt..."
+	@echo "==> setup terragrunt..."
 	@tfenv use ${TERRAFORM_VERSION} || tfenv install ${TERRAFORM_VERSION} && tfenv use ${TERRAFORM_VERSION}
 	@echo ${MESSAGE_HAPPY}
 .PHONY: terragrunt.environment
@@ -80,7 +80,7 @@ terragrunt.taint: terragrunt.validate
 
 terragrunt.taint.module: terragrunt.validate
 	@if [ -z "${module}" ]; then \
-		echo "=====> var module is required"; \
+		echo "==> var module is required"; \
 		exit 2; \
 	fi
 	@if [ -z "${stage}" ] && [ -n "${module}" ]; then \
@@ -92,11 +92,11 @@ terragrunt.taint.module: terragrunt.validate
 
 terragrunt.destroy.module: terragrunt.validate
 	@if [ -z "${module}" ]; then \
-		echo "=====> var module is required"; \
+		echo "==> var module is required"; \
 		exit 2; \
 	fi
 	@if [ -z "${stage}" ] && [ -n "${module}" ]; then \
-		echo "=====> var module and stage is required"; \
+		echo "==> var module and stage is required"; \
 		exit 2; \
 	elif [ -n "${stage}" ] && [ -n "${module}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) destroy -target=module.${module}; \
