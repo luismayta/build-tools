@@ -2,13 +2,11 @@
   "name": "@hadenlabs/build-tools",
   "version": "0.0.0",
   "description": "build-tools for zsh",
-  "repository": "ssh://git@github.com/hadenlabs/build-tools.git",
   "author": "Luis Mayta <slovacus@gmail.com>",
   "license": "LGPL-3.0",
   "engines": {
     "node": ">=14"
   },
-  "keywords": [],
   "scripts": {
     "build": "./node_modules/.bin/tsc -p",
     "build:tool": "yarn run build ./tools/",
@@ -29,6 +27,30 @@
     "prettier:fix": "yarn prettier:lint --write=true",
     "prettier:lint": "yarn prettier '**/*.{js?(on),ts?(x),scss,md,y?(a)ml,gql,graphql?(s),less,mjml}' --write=false --list-different"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit",
+      "commit-msg": "commitlint --config=.github/linters/.commitlintrc.json -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadenlabs/build-tools.git"
+  },
+  "keywords": [
+    "commitlint",
+    "git",
+    "commits",
+    "hadenlabs"
+  ],
+  "bugs": {
+    "url": "https://github.com/hadenlabs/build-tools/issues"
+  },
+  "homepage": "https://github.com/hadenlabs/build-tools#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
@@ -36,15 +58,15 @@
     "@hadenlabs/commitlint-config": "^0.1.0",
     "@types/jest": "^26.0.22",
     "@types/mocha": "^8.2.2",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
     "axios": "^0.21.1",
     "babel-cli": "^6.26.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
@@ -58,15 +80,6 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "prettier": "./.github/linters/prettier.config.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit",
-      "commit-msg": "commitlint --config=.github/linters/.commitlintrc.json -E HUSKY_GIT_PARAMS"
-    }
-  },
+  "prettier": ".github/linters/prettier.config.js",
   "stylintrc": ".github/linters/.stylintrc"
 }
