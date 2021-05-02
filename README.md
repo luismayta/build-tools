@@ -14,7 +14,7 @@
 
 # build-tools
 
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hadenlabs/build-tools.svg?label=latest&sort=semver)](https://github.com/hadenlabs/build-tools/releases) [![Lint](https://github.com/hadenlabs/build-tools/actions/workflows/lint.yml/badge.svg?branch=develop)](https://github.com/hadenlabs/build-tools/actions) [![Issues](https://img.shields.io/github/issues/hadenlabs/build-tools.svg)](https://github.com/hadenlabs/build-tools/issues) [![Latest Release](https://img.shields.io/github/release/hadenlabs/build-tools.svg)](https://github.com/hadenlabs/build-tools/releases) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/build-tools/readme)](https://github.com/hadenlabs/build-tools)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/hadenlabs/build-tools?label=latest&sort=semver)](https://github.com/hadenlabs/build-tools/releases) [![Latest Release](https://img.shields.io/github/release/hadenlabs/build-tools)](https://github.com/hadenlabs/build-tools/releases) [![Lint](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/lint-code)](https://github.com/hadenlabs/build-tools/actions) [![Issues](https://img.shields.io/github/issues/hadenlabs/build-tools)](https://github.com/hadenlabs/build-tools/issues) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735)](https://keepachangelog.com) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/build-tools/readme)](https://github.com/hadenlabs/build-tools)
 
 build-tools for hadenlabs.
 
