@@ -30,9 +30,11 @@ AWS_PROFILE_NAME ?=
 
 PYTHON_VERSION=3.8.0
 NODE_VERSION=14.15.5
-TERRAFORM_VERSION=0.14.10
+TERRAFORM_VERSION=0.15.1
 PYENV_NAME="${PROJECT}"
 GIT_IGNORES:=python,node,go,terraform,ansible
+GIT_IGNORES_CUSTOM:= bin \
+	bin
 GI:=gi
 
 # issues reviewers
@@ -103,5 +105,4 @@ setup.sre: setup
 environment:
 	@echo "==> loading virtualenv ${PYENV_NAME}..."
 	make python.environment
-	make terragrunt.environment
 	@echo ${MESSAGE_HAPPY}
