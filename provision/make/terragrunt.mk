@@ -1,8 +1,9 @@
 ## Terragrunt
-.PHONY: terragrunt.help
 TERRAFORM_DIR:=$(PROVISION_DIR)/terraform
 terragrunt := terragrunt
 
+## show terragrunt help
+.PHONY: terragrunt.help
 terragrunt.help:
 	@echo '    terragrunt:'
 	@echo ''
@@ -18,14 +19,20 @@ terragrunt.help:
 	@echo '                                   example:'
 	@echo '                         make terragrunt.import command="module.repository_learn_go.github_repository.this learn-go" stage=core'
 	@echo '        terragrunt.destroy.module  module by stage'
+	@echo '                                   example:'
+	@echo '                         make terragrunt.destroy.module module="repository_eslint_config" stage=core'
 	@echo ''
 
+## make terragrunt validate
+.PHONY: terragrunt.validate
 terragrunt.validate:
 	@if [ "${AWS_PROFILE_NAME}" != "${TEAM}" ]; then \
 		echo "==> var ${AWS_PROFILE_NAME} not correspond ${TEAM}"; \
 		exit 2; \
 	fi
 
+## make terragrunt
+.PHONY: terragrunt
 terragrunt: terragrunt.validate
 	@if [ -z "${command}" ]; then \
 		make terragrunt.help;\
@@ -36,26 +43,31 @@ terragrunt: terragrunt.validate
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) ${command} --terragrunt-source-update; \
 	fi
 
+## install setup dependences terragrunt
+.PHONY: terragrunt.setup
 terragrunt.setup: terragrunt.validate
 	@echo "==> setup terragrunt..."
 	@tfenv install ${TERRAFORM_VERSION} && tfenv use ${TERRAFORM_VERSION}
 	@echo ${MESSAGE_HAPPY}
-.PHONY: terragrunt.setup
 
+## use version terraform
+.PHONY: terragrunt.environment
 terragrunt.environment:
 	@echo "==> setup terragrunt..."
 	@tfenv use ${TERRAFORM_VERSION} || tfenv install ${TERRAFORM_VERSION} && tfenv use ${TERRAFORM_VERSION}
 	@echo ${MESSAGE_HAPPY}
-.PHONY: terragrunt.environment
 
+## use version terraform
+.PHONY: terragrunt.init
 terragrunt.init: terragrunt.validate
 	@if [ -z "${stage}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/ && $(terragrunt) init --reconfigure; \
 	else \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage}/ && $(terragrunt) init --reconfigure; \
 	fi
-.PHONY: terragrunt.init
 
+## state terragrunt command
+.PHONY: terragrunt.state
 terragrunt.state: terragrunt.validate
 	@if [ -z "${command}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/prod && $(terragrunt) state ${command} --terragrunt-source-update; \
@@ -65,8 +77,9 @@ terragrunt.state: terragrunt.validate
 	elif [ -n "${stage}" ] && [ -n "${command}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) state ${command} --terragrunt-source-update; \
 	fi
-.PHONY: terragrunt.state
 
+## taint terragrunt command
+.PHONY: terragrunt.taint
 terragrunt.taint: terragrunt.validate
 	@if [ -z "${args}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/prod && $(terragrunt) taint ${args}; \
@@ -76,8 +89,9 @@ terragrunt.taint: terragrunt.validate
 	elif [ -n "${stage}" ] && [ -n "${args}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) taint ${args}; \
 	fi
-.PHONY: terragrunt.taint
 
+## taint module terragrunt command
+.PHONY: terragrunt.taint.module
 terragrunt.taint.module: terragrunt.validate
 	@if [ -z "${module}" ]; then \
 		echo "==> var module is required"; \
@@ -88,8 +102,9 @@ terragrunt.taint.module: terragrunt.validate
 	elif [ -n "${stage}" ] && [ -n "${module}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) state list | grep module.${module} | xargs -n1 terraform taint; \
 	fi
-.PHONY: terragrunt.taint.module
 
+## terragrunt destroy module
+.PHONY: terragrunt.destroy.module
 terragrunt.destroy.module: terragrunt.validate
 	@if [ -z "${module}" ]; then \
 		echo "==> var module is required"; \
@@ -101,12 +116,12 @@ terragrunt.destroy.module: terragrunt.validate
 	elif [ -n "${stage}" ] && [ -n "${module}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) destroy -target=module.${module}; \
 	fi
-.PHONY: terragrunt.destroy.module
 
+## terragrunt import
+.PHONY: terragrunt.import
 terragrunt.import: terragrunt.validate
 	@if [ -z "${stage}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/ && $(terragrunt) import ${command} ; \
 	else \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage}/ && $(terragrunt) import ${command} ; \
 	fi
-.PHONY: terragrunt.import
