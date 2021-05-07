@@ -57,8 +57,6 @@ export README_INCLUDES ?= $(file://$(shell pwd)/?type=text/plain)
 
 FILE_README:=$(ROOT_DIR)/README.md
 
-terragrunt:=terragrunt
-
 include provision/make/*.mk
 
 ## Display help for all targets
@@ -96,7 +94,7 @@ setup:
 ## setup environment for sre
 .PHONY: setup.sre
 setup.sre: setup
-	@echo "----> install packages for SRE..."
+	@echo "==> install packages for SRE..."
 	make terragrunt.setup
 	@echo ${MESSAGE_HAPPY}
 
