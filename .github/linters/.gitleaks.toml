@@ -129,8 +129,7 @@ title = "gitleaks config"
             '''slovacus@gmail.com''',
             '''hola@hadenlabs.com''',
             '''support@hadenlbas.com''',
-            '''support@hadenlabs.com''',
-            '''dum-u@hadenlabs.com''',
+            '''support@hadenlabs.com'''
         ]
 
 [[rules]]
@@ -162,23 +161,27 @@ title = "gitleaks config"
 
 [[rules]]
     description = "Files with keys and credentials"
-    file = '''(?i)(id_rsa|passwd|id_rsa.pub|pgpass|pem|ppk)'''
-    tags = ["key", "credentials"]
+    file = '''(?i)(id_rsa|passwd|id_rsa.pub|pgpass)$'''
+    tags = ["key", "files"]
+
+[[rules]]
+    description = "Extension Files with keys and credentials"
+    file = '''(.*?)(pub|pem|ppk|key)$'''
+    tags = ["key", "files"]
 
 # Global allowlist
 [allowlist]
     description = "files allowlists"
     files = [
-      '''(.*?)(jpg|gif|png|doc|pdf|bin|mp3|mp4|mov|ttf|woff|woff2|eot|lock)$''',
+      '''(.*?)(jpg|gif|doc|pdf|bin)$''',
       '''^\.gitignore$''',
       '''^\.gitleaks.toml$''',
       '''^yarn.lock$''',
     ]
 
 [whitelist]
-	description = "Ignore"
+	description = "Ignore gitleaks config"
 	files = [
-    '''(.*?)(jpg|gif|png|doc|pdf|bin|mp3|mp4|mov|ttf|woff|woff2|eot|lock)$''',
     '''^\.gitleaks.toml$''',
     '''^\.gitignore$''',
     '''^yarn.lock$''',
