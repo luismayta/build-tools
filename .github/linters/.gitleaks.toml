@@ -129,7 +129,8 @@ title = "gitleaks config"
             '''slovacus@gmail.com''',
             '''hola@hadenlabs.com''',
             '''support@hadenlbas.com''',
-            '''support@hadenlabs.com'''
+            '''support@hadenlabs.com''',
+            '''dum-u@hadenlabs.com''',
         ]
 
 [[rules]]
@@ -173,15 +174,16 @@ title = "gitleaks config"
 [allowlist]
     description = "files allowlists"
     files = [
-      '''(.*?)(jpg|gif|doc|pdf|bin)$''',
+      '''(.*?)(jpg|gif|png|doc|pdf|bin|mp3|mp4|mov|ttf|woff|woff2|eot|lock)$''',
       '''^\.gitignore$''',
       '''^\.gitleaks.toml$''',
       '''^yarn.lock$''',
     ]
 
 [whitelist]
-	description = "Ignore gitleaks config"
+	description = "Ignore"
 	files = [
+    '''(.*?)(jpg|gif|png|doc|pdf|bin|mp3|mp4|mov|ttf|woff|woff2|eot|lock)$''',
     '''^\.gitleaks.toml$''',
     '''^\.gitignore$''',
     '''^yarn.lock$''',
