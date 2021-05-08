@@ -1,3 +1,4 @@
+#
 # Dockerfile for build-tools
 #
 
@@ -26,37 +27,6 @@ ENV PERSIST_DEPS \
     shellcheck
 
 
-FROM python:3.8-alpine3.13 as python-builder
-
-ENV PERSIST_DEPS \
-    py3-pip \
-    python3 \
-    python3-dev
-
-ENV MODULES_PYTHON \
-    checkov
-
-ENV BUILD_DEPS \
-    build-base \
-    fakeroot \
-    curl \
-    openssl
-
-RUN apk add --no-cache \
-    $PERSIST_DEPS \
-    && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
-    && ln -sf /usr/bin/python3 /usr/bin/python \
-    && ln -sf /usr/bin/pip3 /usr/bin/pip \
-    # Install modules python
-    && python -m pip install --user --upgrade --no-cache-dir $MODULES_PYTHON \
-    && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
-    && apk del .build-deps \
-    && rm -rf /root/.cache \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
-
-
 FROM base as go-builder
 
 ENV BUILD_DEPS \
@@ -81,10 +51,23 @@ RUN apk --no-cache add \
 
 FROM base as crossref
 
+ENV PERSIST_DEPS \
+    git \
+    shellcheck \
+    py3-pip \
+    python3 \
+    python3-dev
+
+ENV MODULES_PYTHON \
+    checkov
+
 RUN apk add --no-cache \
     $BASE_DEPS \
     $PERSIST_DEPS \
     && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
+    && ln -sf /usr/bin/python3 /usr/bin/python \
+    && ln -sf /usr/bin/pip3 /usr/bin/pip \
+    && python -m pip install --user --upgrade --no-cache-dir $MODULES_PYTHON \
     && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
     && apk del .build-deps \
     && rm -rf /root/.cache \
@@ -96,11 +79,6 @@ RUN apk add --no-cache \
 COPY --from=go-builder /go/bin/* /usr/local/bin/
 COPY --from=gomplate /gomplate /usr/local/bin/gomplate
 COPY --from=golangci-lint /usr/bin/golangci-lint /usr/local/bin/golangci-lint
-
-# python
-COPY --from=python-builder /usr/bin/python /usr/bin/
-COPY --from=python-builder /usr/bin/pip /usr/bin/
-COPY --from=python-builder /root/.local/bin/checkov /usr/local/bin/
 
 # terraform
 COPY --from=hashicorp /bin/terraform /usr/local/bin/
