@@ -7,38 +7,26 @@ FROM golangci/golangci-lint:v1.39.0 as golangci-lint
 FROM alpine/terragrunt:0.15.0 as hashicorp
 FROM wata727/tflint:0.28.0 as tflint
 
-FROM golang:1.16.3-alpine3.13 as base
+FROM python:3.8.0-slim as base
 
-ENV PATH $PATH:/root/.local/bin
+ENV PATH $PATH:/go/bin:/usr/local/go/bin:/root/.local/bin
 
 ENV BASE_DEPS \
-    alpine-sdk \
     bash
 
 ENV BUILD_DEPS \
-    build-base \
     fakeroot \
     curl \
     openssl
 
-ENV PERSIST_DEPS \
-    git \
-    make \
-    shellcheck
-
-
-FROM base as go-builder
+FROM golang:1.16.4 as go-builder
 
 ENV BUILD_DEPS \
-    fakeroot \
     gcc \
-    git \
-    make \
-    openrc \
     openssl
 
-RUN apk --no-cache add \
-    $BASE_DEPS \
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
     $BUILD_DEPS \
     && go get -u -v golang.org/x/tools/cmd/goimports \
     && go get -u -v github.com/BurntSushi/toml/cmd/tomlv \
@@ -49,34 +37,32 @@ RUN apk --no-cache add \
     && go get -u -v github.com/tfsec/tfsec/cmd/tfsec \
     && go get -u -v github.com/go-critic/go-critic/cmd/gocritic
 
+
 FROM base as crossref
 
 ENV PERSIST_DEPS \
     git \
-    shellcheck \
-    py3-pip \
-    python3 \
-    python3-dev
+    shellcheck
 
 ENV MODULES_PYTHON \
     checkov
 
-RUN apk add --no-cache \
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
     $BASE_DEPS \
+    $BUILD_DEPS \
     $PERSIST_DEPS \
-    && apk add --no-cache --virtual .build-deps $BUILD_DEPS \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip \
     && python -m pip install --user --upgrade --no-cache-dir $MODULES_PYTHON \
     && sed -i "s/root:\/root:\/bin\/ash/root:\/root:\/bin\/bash/g" /etc/passwd \
-    && apk del .build-deps \
-    && rm -rf /root/.cache \
-    && rm -rf /var/cache/apk/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
+    && apt-get clean \
+    && apt-get purge -y \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # go
-COPY --from=go-builder /go/bin/* /usr/local/bin/
+COPY --from=go-builder /usr/local/go/bin/go /usr/local/go/bin/
+COPY --from=go-builder /go/bin/* /go/bin/
 COPY --from=gomplate /gomplate /usr/local/bin/gomplate
 COPY --from=golangci-lint /usr/bin/golangci-lint /usr/local/bin/golangci-lint
 
