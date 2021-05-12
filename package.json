@@ -1,6 +1,6 @@
 {
   "name": "@hadenlabs/build-tools",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "build-tools",
   "author": "Luis Mayta <slovacus@gmail.com>",
   "license": "LGPL-3.0",
