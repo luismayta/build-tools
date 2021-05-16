@@ -1,6 +1,10 @@
 package config
 
 import (
+	"path/filepath"
+
+	"runtime"
+
 	"github.com/hadenlabs/build-tools/internal/errors"
 	"github.com/hadenlabs/build-tools/internal/version"
 )
@@ -20,6 +24,9 @@ type Configurer interface {
 
 // ReadConfig read values and files for config.
 func (c *Config) ReadConfig() (*Config, error) {
+	_, filePath, _, _ := runtime.Caller(0)
+	rootDir := filepath.Join(filepath.Dir(filePath))
+	c.App.RootPath = filepath.Join(rootDir, "..")
 	tag := version.Short()
 	c.Docker.TargetImage = targetImage
 	c.Docker.Tag = tag

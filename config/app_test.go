@@ -10,3 +10,8 @@ func TestAppVersionNotNil(t *testing.T) {
 	conf := Initialize()
 	assert.NotEmpty(t, conf.App.Version)
 }
+
+func TestAppRootPathNotNil(t *testing.T) {
+	conf := Initialize()
+	assert.NotEmpty(t, conf.App.RootPath)
+}
