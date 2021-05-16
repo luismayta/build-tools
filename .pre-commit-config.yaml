@@ -11,7 +11,7 @@ repos:
             .+\.lock$|
           )$
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.0.1
     hooks:
       - id: detect-private-key
         files: ^(?!\.?git-crypt)
@@ -40,7 +40,7 @@ repos:
       - id: fix-encoding-pragma
       - id: sort-simple-yaml
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: b7e7853e35a79db975171f80f0aabedb4f2e3e78
+    rev: f6cc97fd7683611087766bb542c9a11e70db2f92
     hooks:
       - id: do-not-commit
       - id: markdown-link-check
