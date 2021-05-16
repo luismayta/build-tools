@@ -143,23 +143,16 @@ function installDocker() {
 
     curl -sSL https://get.docker.com | sh
 
-	# Find out if the machine uses nogroup or nobody for the permissionless group
-	if grep -qs "^nogroup:" /etc/group; then
-		NOGROUP=nogroup
-	else
-		NOGROUP=nobody
-	fi
-
-	# Add group and permissions
-	if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
-        messageWarning "function not implemented"
-	elif [[ $OS == "ubuntu" ]] && [[ $VERSION_ID == "16.04" ]]; then
-        groupadd docker
-        usermod -aG docker "${USER}"
-	else
-        groupadd docker
-        usermod -aG docker "${USER}"
-	fi
+	# # Add group and permissions
+	# if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
+    #     messageWarning "function not implemented"
+	# elif [[ $OS == "ubuntu" ]] && [[ $VERSION_ID == "16.04" ]]; then
+    #     groupadd docker
+    #     usermod -aG docker "${USER}"
+	# else
+    #     groupadd docker
+    #     usermod -aG docker "${USER}"
+	# fi
 
 }
 
