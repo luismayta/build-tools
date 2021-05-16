@@ -126,9 +126,8 @@ function installDocker() {
             curl \
             gnupg \
             lsb-release
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        curl -fsSL https://get.docker.com/gpg | apt-key add -
         apt-get update -y
-        apt-get install -y docker-ce docker-ce-cli containerd.io
     elif [[ $OS == 'centos' ]]; then
         messageWarning "function not implemented"
     elif [[ $OS == 'oracle' ]]; then
@@ -141,6 +140,8 @@ function installDocker() {
         # Install required dependencies and upgrade the system
         messageWarning "function not implemented"
     fi
+
+    curl -sSL https://get.docker.com | sh
 
 	# Find out if the machine uses nogroup or nobody for the permissionless group
 	if grep -qs "^nogroup:" /etc/group; then
@@ -160,16 +161,6 @@ function installDocker() {
         usermod -aG docker "${USER}"
 	fi
 
-    # Docker to start on boot
-    if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
-        messageWarning "function not implemented"
-	elif [[ $OS == "ubuntu" ]] && [[ $VERSION_ID == "16.04" ]]; then
-        systemctl enable docker.service
-        systemctl enable containerd.service
-	else
-        systemctl enable docker.service
-        systemctl enable containerd.service
-	fi
 }
 
 # Check for root, TUN, OS...
