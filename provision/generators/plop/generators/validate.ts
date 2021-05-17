@@ -17,18 +17,18 @@ export const validateGenerator: PlopGeneratorConfig = {
   ],
   actions: (data) => {
     const answers = data as Answers
-    const validatePath = `${testPath}/validate/`
+    const testValidatePath = `${testPath}/validate/`
 
-    if (pathExists(validatePath)) {
-      throw new Error(`Stage '${answers.nameValidate}' exists in '${validatePath}'`)
+    if (!pathExists(testValidatePath)) {
+      throw new Error(`Stage '${answers.nameValidate}' exists in '${testValidatePath}'`)
     }
 
     const actions: Actions = []
 
     actions.push({
       type: 'add',
-      templateFile: `${baseTemplatesPath}/validate/test.append.hbs`,
-      path: `${testPath}/${sanitize(answers.nameValidate)}_test.go`
+      templateFile: `${baseTemplatesPath}/validate/test.add.hbs`,
+      path: `${testValidatePath}/${sanitize(answers.nameValidate)}_test.go`
     })
 
     return actions

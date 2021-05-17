@@ -1,0 +1,20 @@
+func Test{{pascalCase nameBuilder}}BuilderSuccess(t *testing.T) {
+	conf := config.Initialize()
+	imageTag := conf.Docker.ImageTagLatest()
+	otherOptions := []string{}
+	builderOptions := &docker.BuilderOptions{
+		Tags:         []string{imageTag},
+		OtherOptions: otherOptions,
+	}
+
+	docker.Builder(t, "../../", builderOptions)
+	opts := &docker.RunOptions{
+		Command: []string{
+			"bash", "-c",
+			"compgen -c", "|",
+			"sort -u",
+		},
+	}
+	outputListApps := docker.Run(t, imageTag, opts)
+	assert.NotEmpty(t, outputListApps, outputListApps)
+}

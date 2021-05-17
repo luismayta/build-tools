@@ -1,12 +1,12 @@
-import { buildGenerator } from './build'
+import { builderGenerator } from './builder'
 import { validateGenerator } from './validate'
 import { scriptGenerator } from './scripts'
-import { BuildPrompNames, ValidatePrompNames, ScriptsPrompNames } from './entities'
+import { BuilderPrompNames, ValidatePrompNames, ScriptsPrompNames } from './entities'
 export {
-  buildGenerator,
+  builderGenerator,
   validateGenerator,
   scriptGenerator,
-  BuildPrompNames,
+  BuilderPrompNames,
   ValidatePrompNames,
   ScriptsPrompNames
 }

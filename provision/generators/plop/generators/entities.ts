@@ -2,8 +2,8 @@ export enum ValidatePrompNames {
   'name' = 'nameValidate'
 }
 
-export enum BuildPrompNames {
-  'name' = 'nameBuild'
+export enum BuilderPrompNames {
+  'name' = 'nameBuilder'
 }
 
 export enum ScriptsPrompNames {
@@ -11,5 +11,5 @@ export enum ScriptsPrompNames {
 }
 
 export type AnswersValidate = { [P in ValidatePrompNames]: string }
-export type AnswersBuild = { [P in BuildPrompNames]: string }
+export type AnswersBuilder = { [P in BuilderPrompNames]: string }
 export type AnswersScript = { [P in ScriptsPrompNames]: string }
