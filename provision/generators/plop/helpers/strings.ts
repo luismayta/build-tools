@@ -1,5 +1,7 @@
+import helpers from 'handlebars-helpers'
+
 export const sanitize = (name: string): string => {
-  return name.replace(/[.-]+/g, '').toString()
+  return helpers().snakecase(name.replace(/[.-]+/g, '').toString())
 }
 
 export const cleanString = (text: string): string => {
