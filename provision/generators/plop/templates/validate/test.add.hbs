@@ -1,4 +1,4 @@
-func Test{{sanitize nameValidate}}ValidateSuccess(t *testing.T) {
+func Test{{pascalCase nameValidate}}ValidateSuccess(t *testing.T) {
 	conf := config.Initialize()
 	imageTag := conf.Docker.ImageTagLatest()
 	otherOptions := []string{}
