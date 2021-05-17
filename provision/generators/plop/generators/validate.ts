@@ -26,10 +26,9 @@ export const validateGenerator: PlopGeneratorConfig = {
     const actions: Actions = []
 
     actions.push({
-      type: 'append',
+      type: 'add',
       templateFile: `${baseTemplatesPath}/validate/test.append.hbs`,
-      path: `${testPath}/${sanitize(answers.nameValidate)}_test.go`,
-      abortOnFail: true
+      path: `${testPath}/${sanitize(answers.nameValidate)}_test.go`
     })
 
     return actions

@@ -2,11 +2,10 @@ import { Actions, PlopGeneratorConfig } from 'node-plop'
 import * as path from 'path'
 import { BuildPrompNames, AnswersBuild as Answers } from './entities'
 import { baseRootPath, baseTemplatesPath, pathExists } from '../utils'
-import { sanitize } from '../helpers'
-const testPath = path.join(baseRootPath, 'test')
+const testPath = path.join(baseRootPath, 'test', 'build')
 
 export const buildGenerator: PlopGeneratorConfig = {
-  description: 'add an test build',
+  description: 'add a test build',
   prompts: [
     {
       type: 'input',
@@ -17,18 +16,17 @@ export const buildGenerator: PlopGeneratorConfig = {
   ],
   actions: (data) => {
     const answers = data as Answers
-    const buildPath = `${testPath}/build}`
 
-    if (!pathExists(buildPath)) {
-      throw new Error(`Stage '${answers.nameBuild}' not exists in '${buildPath}'`)
+    if (!pathExists(testPath)) {
+      throw new Error(`path '${answers.nameBuild}' not exists in '${testPath}'`)
     }
 
     const actions: Actions = []
 
     actions.push({
       type: 'append',
-      templateFile: `${baseTemplatesPath}/image/test.append.hbs`,
-      path: `${testPath}/docker_${sanitize(answers.nameBuild)}_test.go`,
+      templateFile: `${baseTemplatesPath}/build/test.append.hbs`,
+      path: `${testPath}/docker_test.go`,
       abortOnFail: true
     })
 
