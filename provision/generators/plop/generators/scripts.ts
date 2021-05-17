@@ -3,10 +3,10 @@ import * as path from 'path'
 import { ScriptsPrompNames, AnswersScript as Answers } from './entities'
 import { baseRootPath, baseTemplatesPath, pathExists } from '../utils'
 import { sanitize } from '../helpers'
-const testPath = path.join(baseRootPath, 'test')
+const testPath = path.join(baseRootPath, 'test', 'scripts')
 
 export const scriptGenerator: PlopGeneratorConfig = {
-  description: 'add an script test',
+  description: 'add a script test',
   prompts: [
     {
       type: 'input',
@@ -17,10 +17,9 @@ export const scriptGenerator: PlopGeneratorConfig = {
   ],
   actions: (data) => {
     const answers = data as Answers
-    const scriptPath = `${baseRootPath}/scripts/`
 
-    if (pathExists(scriptPath)) {
-      throw new Error(`Stage '${answers.nameScript}' exists in '${scriptPath}'`)
+    if (!pathExists(testPath)) {
+      throw new Error(`Path '${answers.nameScript}' not exists in '${testPath}'`)
     }
 
     const actions: Actions = []
