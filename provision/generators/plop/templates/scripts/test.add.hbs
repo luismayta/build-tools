@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test{{sanitize nameScript}}ScriptSuccess(t *testing.T) {
+func Test{{pascalCase nameScript}}ScriptSuccess(t *testing.T) {
 	conf := config.Initialize()
 	imageTag := "ubuntu:20.04"
 	opts := &docker.RunOptions{
@@ -19,7 +19,7 @@ func Test{{sanitize nameScript}}ScriptSuccess(t *testing.T) {
 		},
 		Command: []string{
 			"bash", "-c",
-			"source /data/provision/scripts/{{nameScript}}/install.sh",
+			"source /data/provision/scripts/{{sanitize nameScript}}/install.sh",
 		},
 	}
 	outputListApps := docker.Run(t, imageTag, opts)
