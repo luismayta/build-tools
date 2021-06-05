@@ -17,10 +17,6 @@ repos:
         files: ^(?!\.?git-crypt)
         exclude: .github/linters/.gitleaks.toml
       - id: check-merge-conflict
-      - id: trailing-whitespace
-        files: ^tf|-|\.(py|tfvars|tf|tfenv|env|yml|yaml|pem|key|mock)$
-      - id: end-of-file-fixer
-        files: ^tf|-|\.(py|env|yml|yaml|pem|key|mock)$
       - id: check-added-large-files
         files: ^tf|-|\.(py|env|yml|yaml)$
       - id: check-case-conflict
@@ -40,10 +36,12 @@ repos:
       - id: fix-encoding-pragma
       - id: sort-simple-yaml
   - repo: https://github.com/hadenlabs/pre-commit-hooks
-    rev: f6cc97fd7683611087766bb542c9a11e70db2f92
+    rev: 2bed7c6ec4930b235aaf54aff1cf34e3df694f37
     hooks:
       - id: do-not-commit
       - id: markdown-link-check
+        args:
+          - --config=.github/linters/markdown-link-config.json
         exclude: \.tpl.md$
       - id: shellcheck
         exclude: >
@@ -52,7 +50,7 @@ repos:
             .+\.tpl.sh$|
           )$
         args:
-          - --exclude=SC1072,SC1073,SC2068
+          - --exclude=SC1071,SC1073,SC2068
       - id: validate-toml
       - id: no-go-testing
       - id: golangci-lint
@@ -103,10 +101,3 @@ repos:
           - '--ignore-path=.github/linters/.eslintignore'
         files: \.(js|jsx|ts|tsx|mjs|d.ts)$
         exclude: node_modules
-      - id: stylint
-        name: stylint
-        language: system
-        pass_filenames: true
-        entry: node_modules/stylelint/bin/stylelint.js --config=.github/linters/.stylintrc --syntax less **/*.less
-        args: [--fix]
-        files: \.(css|scss|sass|less)$
