@@ -5,8 +5,9 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/docker"
-	"github.com/hadenlabs/build-tools/config"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/hadenlabs/build-tools/config"
 )
 
 func TestBuildToolsValidateTerragruntSuccess(t *testing.T) {
