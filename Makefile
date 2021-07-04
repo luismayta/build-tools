@@ -22,15 +22,9 @@ TEAM := hadenlabs
 REPOSITORY_DOMAIN:=github.com
 REPOSITORY_OWNER:=${TEAM}
 AWS_VAULT ?= ${TEAM}
-KEYBASE_OWNER ?= ${TEAM}
-KEYBASE_PATH_TEAM_NAME ?=team
 PROJECT := build-tools
 
-AWS_PROFILE_NAME ?=
-
 PYTHON_VERSION=3.8.0
-NODE_VERSION=14.16.1
-TERRAFORM_VERSION=0.15.4
 PYENV_NAME="${PROJECT}"
 GIT_IGNORES:=python,node,go,terraform,ansible
 GIT_IGNORES_CUSTOM:= bin \
@@ -87,16 +81,8 @@ setup:
 	make python.setup
 	make python.precommit
 	@[ -e ".env" ] || cp -rf .env.example .env
-	make yarn.setup
 	make git.setup
 	make go.setup
-	@echo ${MESSAGE_HAPPY}
-
-## setup environment for sre
-.PHONY: setup.sre
-setup.sre: setup
-	@echo "==> install packages for SRE..."
-	make terragrunt.setup
 	@echo ${MESSAGE_HAPPY}
 
 ## setup environment of project
