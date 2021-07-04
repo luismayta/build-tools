@@ -12,13 +12,27 @@
 
   -->
 
-[![GitHub release](https://img.shields.io/github/release/hadenlabs/build-tools?style=flat-square)](https://github.com/hadenlabs/build-tools/releases/latest) [![Lint](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/lint-code)](https://github.com/hadenlabs/build-tools/actions?workflow=lint-code) [![CI](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/ci)](https://github.com/hadenlabs/build-tools/actions?workflow=ci) [![Test](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/test)](https://github.com/hadenlabs/build-tools/actions?workflow=test) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735)](https://keepachangelog.com) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/build-tools/readme)](https://github.com/hadenlabs/build-tools)
+ 
+
+ [![GitHub release](https://img.shields.io/github/release/hadenlabs/build-tools?style=flat-square)](https://github.com/hadenlabs/build-tools/releases/latest) [![Lint](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/lint-code)](https://github.com/hadenlabs/build-tools/actions?workflow=lint-code) [![CI](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/ci)](https://github.com/hadenlabs/build-tools/actions?workflow=ci) [![Test](https://img.shields.io/github/workflow/status/hadenlabs/build-tools/test)](https://github.com/hadenlabs/build-tools/actions?workflow=test) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow)](https://conventionalcommits.org) [![KeepAChangelog](https://img.shields.io/badge/Keep%20A%20Changelog-1.0.0-%23E05735)](https://keepachangelog.com) [![Beacon](https://ga-beacon.appspot.com/G-MZEK48EGE8/build-tools/readme)](https://github.com/hadenlabs/build-tools)
 
 # build-tools
 
-build-tools for hadenlabs.
+ build-tools for hadenlabs. 
+
+
+
+
+
+
+
+
+
+
+
 
 ## Requirements
+
 
 This is a list of applications that need to be installed previously to enjoy all the goodies of this configuration:
 
@@ -34,15 +48,33 @@ or
 - [zsh-docker](https://github.com/hadenlabs/zsh-docker)
 - [zsh-tfenv](https://github.com/luismayta/zsh-tfenv)
 
+
+
+
+
+
 ## Usage
 
 ```bash
 
 ```
 
+
+
+
+
+
 ## Examples
 
 ### common
+
+
+
+
+
+
+
+
 
 ## Help
 
@@ -80,20 +112,34 @@ Using the given version number of `MAJOR.MINOR.PATCH`, we apply the following co
 
 ### Backwards compatibility in `0.0.z` and `0.y.z` version
 
-- In the context of initial development, backwards compatibility in versions `0.0.z` is **not guaranteed** when `z` is increased. (Initial development)
-- In the context of pre-release, backwards compatibility in versions `0.y.z` is **not guaranteed** when `y` is increased. (Pre-release)
+- In the context of initial development, backwards compatibility in versions `0.0.z` is **not guaranteed** when `z` is
+  increased. (Initial development)
+- In the context of pre-release, backwards compatibility in versions `0.y.z` is **not guaranteed** when `y` is
+  increased. (Pre-release)
+
+
+
 
 ## Copyright
 
 Copyright © 2018-2021 [Hadenlabs](https://hadenlabs.com)
 
+
+
 ## Trademarks
 
 All other trademarks referenced herein are the property of their respective owners.
 
+
+
+
+
+
 ## License
 
 The code and styles are licensed under the LGPL-3.0 license [See project license.](LICENSE).
+
+
 
 ## Don't forget to 🌟 Star 🌟 the repo if you like build-tools
 
