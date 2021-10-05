@@ -1,0 +1,61 @@
+name: test
+
+on:
+  workflow_run:
+    workflows:
+      - lint-code
+    types:
+      - completed
+
+  schedule:
+    - cron: '0 0 * * *' # every day at midnight
+
+  push:
+    branches:
+      - develop
+      - main
+
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+      # https://semver.org/ proper release tags, more or less
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      # prerelease tags, more or less
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+  pull_request:
+    branches:
+      - develop
+      - main
+
+env:
+  IMAGE_NAME: 'hadenlabs/build-tools'
+
+jobs:
+  test:
+    name: test
+    strategy:
+      matrix:
+        go-version: [1.15.x, 1.16.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: check out a copy of the repo
+        uses: actions/checkout@v2
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Check Dependences
+        run: task go:check:go
+
+      - name: Test go
+        run: task go:test
