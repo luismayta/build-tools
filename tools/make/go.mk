@@ -1,6 +1,6 @@
 # go
 
-GOLANGCI_VERSION ?= 1.39.0
+GOLANGCI_VERSION ?= 1.42.0
 
 GOPATH	= $(shell go env GOPATH)
 GOBIN	= $(GOPATH)/bin
