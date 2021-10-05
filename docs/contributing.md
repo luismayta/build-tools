@@ -1,3 +1,7 @@
+<!-- Space: BuildTools -->
+<!-- Parent: Project -->
+<!-- Title: How To Contribute -->
+
 # How To Contribute
 
 Contributions to build-tools are welcome.
