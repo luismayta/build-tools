@@ -49,7 +49,7 @@ FROM go-builder AS tfsec
 
 RUN GO111MODULE=on go get -u  \
     --ldflags "-s -w" --trimpath \
-    github.com/tfsec/tfsec/cmd/tfsec \
+    github.com/aquasecurity/tfsec/cmd/tfsec@latest \
     && upx -9 ${GOPATH}/bin/tfsec
 
 FROM go-builder AS todocheck
