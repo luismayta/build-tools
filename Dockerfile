@@ -21,22 +21,85 @@ ENV BUILD_DEPS \
 
 FROM golang:1.16.4 as go-builder
 
+ENV GOPATH /go
+ENV GOROOT /usr/local/go
+
+ENV GO111MODULE on
+ENV DEBIAN_FRONTEND noninteractive
+ENV INITRD No
+ENV LANG en_US.UTF-8
+ENV GOFLAGS "-ldflags=-w -ldflags=-s"
+
 ENV BUILD_DEPS \
     gcc \
     openssl
 
+ENV PERSIST_DEPS \
+    upx
+
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
-    $BUILD_DEPS \
-    && go get -u -v golang.org/x/tools/cmd/goimports \
-    && go get -u -v github.com/BurntSushi/toml/cmd/tomlv \
-    && go get -u -v github.com/preslavmihaylov/todocheck \
-    && go get -u -v golang.org/x/lint/golint \
-    && go get -u -v github.com/fzipp/gocyclo/cmd/gocyclo \
-    && go get -u -v github.com/terraform-docs/terraform-docs@v0.13.0 \
-    && go get -u -v github.com/tfsec/tfsec/cmd/tfsec \
-    && go get -u -v github.com/go-critic/go-critic/cmd/gocritic
+    ${BUILD_DEPS} \
+    ${PERSIST_DEPS} \
+    && apt-get clean \
+    && apt-get purge -y \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+FROM go-builder AS tfsec
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/tfsec/tfsec/cmd/tfsec \
+    && upx -9 ${GOPATH}/bin/tfsec
+
+FROM go-builder AS todocheck
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/preslavmihaylov/todocheck \
+    && upx -9 ${GOPATH}/bin/todocheck
+
+FROM go-builder AS golint
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    golang.org/x/lint/golint \
+    && upx -9 ${GOPATH}/bin/golint
+
+FROM go-builder AS tomlv
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/BurntSushi/toml/cmd/tomlv \
+    && upx -9 ${GOPATH}/bin/tomlv
+
+FROM go-builder AS terraform-docs
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/terraform-docs/terraform-docs@v0.13.0 \
+    && upx -9 ${GOPATH}/bin/terraform-docs
+
+FROM go-builder AS goimports
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    golang.org/x/tools/cmd/goimports \
+    && upx -9 ${GOPATH}/bin/goimports
+
+FROM go-builder AS gocyclo
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/fzipp/gocyclo/cmd/gocyclo \
+    && upx -9 ${GOPATH}/bin/gocyclo
+
+FROM go-builder AS gocritic
+
+RUN GO111MODULE=on go get -u  \
+    --ldflags "-s -w" --trimpath \
+    github.com/go-critic/go-critic/cmd/gocritic \
+    && upx -9 ${GOPATH}/bin/gocritic
 
 FROM base as crossref
 
@@ -46,6 +109,10 @@ ENV PERSIST_DEPS \
 
 ENV MODULES_PYTHON \
     checkov
+
+ENV GOPATH /go
+
+ENV GOROOT /usr/local/go
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
@@ -60,13 +127,19 @@ RUN apt-get update -y \
     && apt-get purge -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# go
-COPY --from=go-builder /usr/local/go/bin/go /usr/local/go/bin/
-COPY --from=go-builder /go/bin/* /go/bin/
+# Go
 COPY --from=gomplate /gomplate /usr/local/bin/gomplate
 COPY --from=golangci-lint /usr/bin/golangci-lint /usr/local/bin/golangci-lint
+COPY --from=gocritic $GOPATH/bin/gocritic $GOPATH/bin/gocritic
+COPY --from=gocyclo $GOPATH/bin/gocyclo $GOPATH/bin/gocyclo
+COPY --from=goimports $GOPATH/bin/goimports $GOPATH/bin/goimports
+COPY --from=terraform-docs $GOPATH/bin/terraform-docs $GOPATH/bin/terraform-docs
+COPY --from=tomlv $GOPATH/bin/tomlv $GOPATH/bin/tomlv
+COPY --from=golint $GOPATH/bin/golint $GOPATH/bin/golint
+COPY --from=todocheck $GOPATH/bin/todocheck $GOPATH/bin/todocheck
 
 # terraform
+COPY --from=tfsec $GOPATH/bin/tfsec $GOPATH/bin/tfsec
 COPY --from=hashicorp /bin/terraform /usr/local/bin/
 COPY --from=hashicorp /usr/local/bin/terragrunt /usr/local/bin/
 COPY --from=tflint /usr/local/bin/tflint /usr/local/bin/
