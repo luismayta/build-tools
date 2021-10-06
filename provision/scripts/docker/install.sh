@@ -27,7 +27,6 @@ function messageSuccess() {
     printf "${GREEN}%s${NORMAL}\n" "🍺️ [SUCCESS]: ${1}"
 }
 
-
 function isRoot() {
 	if [ "$EUID" -ne 0 ]; then
 		return 1
@@ -118,42 +117,41 @@ function initialCheck() {
 }
 
 function installDocker() {
-    if [[ $OS =~ (debian|ubuntu) ]]; then
-        apt-get update -y
-        apt-get install -y \
-            apt-transport-https \
-            ca-certificates \
-            curl \
-            gnupg \
-            lsb-release
-        curl -fsSL https://get.docker.com/gpg | apt-key add -
-        apt-get update -y
-    elif [[ $OS == 'centos' ]]; then
-        messageWarning "function not implemented"
-    elif [[ $OS == 'oracle' ]]; then
-        messageWarning "function not implemented"
-    elif [[ $OS == 'amzn' ]]; then
-        messageWarning "function not implemented"
-    elif [[ $OS == 'fedora' ]]; then
-        messageWarning "function not implemented"
-    elif [[ $OS == 'arch' ]]; then
-        # Install required dependencies and upgrade the system
-        messageWarning "function not implemented"
-    fi
+  if [[ $OS =~ (debian|ubuntu) ]]; then
+      apt-get update -y
+      apt-get install -y \
+          apt-transport-https \
+          ca-certificates \
+          curl \
+          gnupg \
+          lsb-release
 
-    curl -sSL https://get.docker.com | sh
+      curl -fsSL https://get.docker.com/gpg | apt-key add -
+      apt-get update -y
+  elif [[ $OS == 'centos' ]]; then
+      messageWarning "function not implemented"
+  elif [[ $OS == 'oracle' ]]; then
+      messageWarning "function not implemented"
+  elif [[ $OS == 'amzn' ]]; then
+      messageWarning "function not implemented"
+  elif [[ $OS == 'fedora' ]]; then
+      messageWarning "function not implemented"
+  elif [[ $OS == 'arch' ]]; then
+      # Install required dependencies and upgrade the system
+      messageWarning "function not implemented"
+  fi
 
-	# # Add group and permissions
-	# if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
-    #     messageWarning "function not implemented"
-	# elif [[ $OS == "ubuntu" ]] && [[ $VERSION_ID == "16.04" ]]; then
-    #     groupadd docker
-    #     usermod -aG docker "${USER}"
-	# else
-    #     groupadd docker
-    #     usermod -aG docker "${USER}"
-	# fi
+  curl -sSL https://get.docker.com | sh
 
+	# Add group and permissions
+	if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
+      messageWarning "function not implemented"
+      return 0
+  fi
+
+  groupadd docker
+  usermod -aG docker "${USER}"
+  newgrp docker
 }
 
 # Check for root, TUN, OS...
