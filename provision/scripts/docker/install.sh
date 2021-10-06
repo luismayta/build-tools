@@ -24,7 +24,7 @@ function messageWarning() {
 }
 
 function messageSuccess() {
-    printf "${GREEN}%s${NORMAL}\n" "🍺️ [SUCCESS]: ${1}"
+    printf "${GREEN}%s${NORMAL}\n" "🧉 [SUCCESS]: ${1}"
 }
 
 function isRoot() {
