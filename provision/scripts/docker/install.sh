@@ -151,7 +151,6 @@ function installDocker() {
 
   groupadd docker
   usermod -aG docker "${USER}"
-  newgrp docker
 }
 
 # Check for root, TUN, OS...
