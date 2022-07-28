@@ -1,7 +1,3 @@
-<!-- Space: BuildTools -->
-<!-- Parent: Project -->
-<!-- Title: Testing -->
-
 # Testing
 
 ## Running tests

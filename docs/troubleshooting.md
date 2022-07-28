@@ -1,12 +1,8 @@
-<!-- Space: BuildTools -->
-<!-- Parent: Project -->
-<!-- Title: Troubleshooting -->
-
 # Troubleshooting
 
 ## Environment
 
-### Wrong pre-commit with pyenv
+### Wrong pre-commit with pipenv
 
 Execute the next:
 
