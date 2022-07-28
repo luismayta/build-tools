@@ -2,15 +2,15 @@ version: '3'
 
 includes:
   changelog: ./provision/task/changelog.yml
+  confluence: ./provision/task/confluence.yml
   python: ./provision/task/python.yml
   yarn: ./provision/task/yarn.yml
   git: ./provision/task/git.yml
   go: ./provision/task/go.yml
   docs: ./provision/task/docs.yml
   docker: ./provision/task/docker.yml
-  gitflow: ./provision/task/gitflow.yml
   version: ./provision/task/version.yml
-  mark: ./provision/task/mark.yml
+  plantuml: ./provision/task/plantuml.yml
   prettier: ./provision/task/prettier.yml
   sonar: ./provision/task/sonar.yml
   ssh: ./provision/task/ssh.yml
@@ -75,7 +75,6 @@ tasks:
       - python:check
       - changelog:check
       - git:check
-      - gitflow:check
       - docs:check
       - yarn:check
       - sonar:check
@@ -91,6 +90,7 @@ tasks:
         --out {{.README_FILE}}
         --datasource config={{.README_YAML}}
         --datasource includes={{.README_INCLUDES}}
+      - task: prettier
 
   prettier:
     run: once
@@ -98,15 +98,22 @@ tasks:
     cmds:
       - task: prettier:all
 
+  test:
+    run: once
+    desc: Execute task test all
+    cmds:
+      - task: go:test
+
   setup:
     desc: Setup dependences of project
     cmds:
+      - >-
+        [ -e ".env" ] || cp -rf .env.example .env
       - task: python:setup
       - task: python:precommit
       - task: go:setup
       - task: yarn:setup
       - task: git:setup
-      - task: gitflow:setup
 
   environment:
     desc: Setup environment of project
