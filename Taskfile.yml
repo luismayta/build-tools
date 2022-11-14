@@ -35,10 +35,13 @@ dotenv:
 
 vars:
   PROJECT_NAME: build-tools
+  GROUP_NAME: hadenlabs
   ORGANIZATION: hadenlabs
   REVIEWERS: luismayta
-  PYTHON_VERSION: 3.9.2
-  GIT_IGNORES: python,node,go,zsh,sonar,terraform
+  PYTHON_VERSION: 3.10.6
+  NODE_VERSION: 16.6.1
+  GIT_IGNORES: python,node,go,zsh,sonar,terraform,linux
+  GOLANGCI_VERSION: 1.42.0
   README_FILE: README.md
   GIT_IGNORES_CUSTOM: >-
     bin
@@ -46,7 +49,10 @@ vars:
     .secrets
     TMP_CHANGELOG.md
     .task
+    .terraform.lock.hcl
     *.lock.hcl
+    *.zip
+    .external_modules
 
 tasks:
   default:
@@ -76,9 +82,6 @@ tasks:
       - changelog:check
       - git:check
       - docs:check
-      - yarn:check
-      - sonar:check
-      - go:check
 
   readme:
     run: once
@@ -98,11 +101,12 @@ tasks:
     cmds:
       - task: prettier:all
 
-  test:
+  upgrade:
     run: once
-    desc: Execute task test all
+    desc: Execute upgrade packages
     cmds:
-      - task: go:test
+      - >-
+        pipenv run pre-commit autoupdate
 
   setup:
     desc: Setup dependences of project
@@ -114,6 +118,12 @@ tasks:
       - task: go:setup
       - task: yarn:setup
       - task: git:setup
+
+  test:
+    run: once
+    desc: Execute task test all
+    cmds:
+      - task: go:test
 
   environment:
     desc: Setup environment of project
