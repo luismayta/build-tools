@@ -412,12 +412,13 @@ zsdoc/data
 
 # End of https://www.toptal.com/developers/gitignore/api/python,node,go,zsh,sonar,terraform,linux
 # custom git ignore files
+bin
+.scannerwork
+.secrets
+TMP_CHANGELOG.md
+.task
+.terraform.lock.hcl
 *.lock.hcl
 *.zip
 .external_modules
-.scannerwork
-.secrets
-.task
-.terraform.lock.hcl
-TMP_CHANGELOG.md
-bin
+

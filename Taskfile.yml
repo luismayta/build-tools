@@ -44,7 +44,7 @@ vars:
   DOCKER_PLATFORMS: linux/amd64
   GOLANGCI_VERSION: 1.42.0
   README_FILE: README.md
-  GIT_IGNORES_CUSTOM: >-
+  GIT_IGNORES_CUSTOM: |
     bin
     .scannerwork
     .secrets
