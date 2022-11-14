@@ -7,18 +7,14 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/hadenlabs/build-tools/config"
+	"github.com/hadenlabs/build-tools/test"
 )
 
 func TestToolsBuilderSuccess(t *testing.T) {
+	t.Parallel()
 	conf := config.Initialize()
+	test.BuildDocker(t, conf)
 	imageTag := conf.Docker.ImageTagLatest()
-	otherOptions := []string{}
-	buildOptions := &docker.BuildOptions{
-		Tags:         []string{imageTag},
-		OtherOptions: otherOptions,
-	}
-
-	docker.Build(t, "../../", buildOptions)
 	opts := &docker.RunOptions{
 		Command: []string{
 			"bash", "-c",
@@ -31,15 +27,10 @@ func TestToolsBuilderSuccess(t *testing.T) {
 }
 
 func TestGetDockerBuilderSuccess(t *testing.T) {
+	t.Parallel()
 	conf := config.Initialize()
+	test.BuildDocker(t, conf)
 	imageTag := conf.Docker.ImageTagLatest()
-	otherOptions := []string{}
-	buildOptions := &docker.BuildOptions{
-		Tags:         []string{imageTag},
-		OtherOptions: otherOptions,
-	}
-
-	docker.Build(t, "../../", buildOptions)
 	opts := &docker.RunOptions{
 		Command: []string{
 			"bash", "-c",

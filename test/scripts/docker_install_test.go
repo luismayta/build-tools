@@ -9,11 +9,14 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/hadenlabs/build-tools/config"
+	"github.com/hadenlabs/build-tools/test"
 )
 
 func TestBuildToolsBuildSuccess(t *testing.T) {
+	t.Parallel()
 	conf := config.Initialize()
-	imageTag := "ubuntu:20.04"
+	test.BuildDocker(t, conf)
+	imageTag := conf.Docker.ImageTagLatest()
 	opts := &docker.RunOptions{
 		Volumes: []string{
 			fmt.Sprintf("%s:%s", conf.App.RootPath, "/data"),

@@ -113,6 +113,14 @@ linters:
     - goerr113
     - scopelint
     - golint
+    - bodyclose
+    - contextcheck
+    - nilerr
+    - noctx
+    - rowserrcheck
+    - sqlclosecheck
+    - structcheck
+    - unparam
 
     # Drives todos nuts
     - godox
