@@ -1,8 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Releasing BuildTools -->
-
-<!-- Label: BuildTools -->
+<!-- Parent: BaseTemplate -->
+<!-- Title: Releasing BaseTemplate -->
+<!-- Label: BaseTemplate -->
 <!-- Label: Project -->
 <!-- Label: Releasing -->
 <!-- Include: disclaimer.md -->

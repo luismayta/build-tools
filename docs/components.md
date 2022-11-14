@@ -1,11 +1,10 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Components BuildTools -->
-
-<!-- Label: BuildTools -->
+<!-- Parent: BaseTemplate -->
+<!-- Title: Components BaseTemplate -->
+<!-- Label: BaseTemplate -->
 <!-- Label: Project -->
 <!-- Label: Components -->
 <!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
 
-# components
+# Components

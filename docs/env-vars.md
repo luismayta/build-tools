@@ -1,10 +1,9 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Env Vars BuildTools -->
-
-<!-- Label: BuildTools -->
+<!-- Parent: BaseTemplate -->
+<!-- Title: EnvVars BaseTemplate -->
+<!-- Label: BaseTemplate -->
 <!-- Label: Project -->
-<!-- Label: Env Vars -->
+<!-- Label: EnvVars -->
 <!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
 

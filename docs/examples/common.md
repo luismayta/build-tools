@@ -1,7 +1,6 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Examples BuildTools -->
-
+<!-- Parent: BaseTemplate -->
+<!-- Title: Examples BaseTemplate -->
 <!-- Label: Examples -->
 <!-- Include: ./../disclaimer.md -->
 <!-- Include: ac:toc -->

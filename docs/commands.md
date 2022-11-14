@@ -1,8 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Commands BuildTools -->
-
-<!-- Label: BuildTools -->
+<!-- Parent: BaseTemplate -->
+<!-- Title: Commands BaseTemplate -->
+<!-- Label: BaseTemplate -->
 <!-- Label: Project -->
 <!-- Label: Commands -->
 <!-- Include: disclaimer.md -->

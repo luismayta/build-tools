@@ -1,8 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BuildTools -->
-<!-- Title: Security BuildTools -->
-
-<!-- Label: BuildTools -->
+<!-- Parent: BaseTemplate -->
+<!-- Title: Security BaseTemplate -->
+<!-- Label: BaseTemplate -->
 <!-- Label: Security -->
 <!-- Include: docs/disclaimer.md -->
 <!-- Include: ac:toc -->
