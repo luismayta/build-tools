@@ -6,16 +6,13 @@ on:
     types:
       - completed
 
-  schedule:
-    - cron: '0 0 */1 * *'
-
   push:
     branches:
-      - develop
+      - main
 
   pull_request:
     branches:
-      - develop
+      - main
 
 jobs:
   readme:

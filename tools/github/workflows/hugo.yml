@@ -1,16 +1,13 @@
 name: Deploy to GitHub Pages
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # every day at midnight
-
   push:
     branches:
-      - develop
+      - main
 
   pull_request:
     branches:
-      - develop
+      - main
 
 jobs:
   hugo:
@@ -19,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout gh-pages
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get Theme
         run: git submodule update --init --recursive

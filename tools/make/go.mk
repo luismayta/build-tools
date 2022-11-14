@@ -41,12 +41,12 @@ bin.golangci-lint:
 ## Run linter go
 .PHONY: go.lint
 go.lint: bin.golangci-lint
-	@$(GOLANGCI-LINT) run --config .github/linters/.golangci.yml
+	@$(GOLANGCI-LINT) run --config .ci/linters/.golangci.yml
 
 ## Fix lint violations
 .PHONY: go.fix
 go.fix: bin.golangci-lint
-	@$(GOLANGCI-LINT) run --fix --config .github/linters/.golangci.yml
+	@$(GOLANGCI-LINT) run --fix --config .ci/linters/.golangci.yml
 
 ## Run go vet against code
 .PHONY: go.vet

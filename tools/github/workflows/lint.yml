@@ -1,17 +1,12 @@
 name: lint-code
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # every day at midnight
-
   pull_request:
     branches:
-      - develop
       - main
 
   push:
     branches:
-      - develop
       - main
 
     tags:
@@ -27,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
         if: ${{ !env.ACT }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - uses: hadenlabs/action-pre-commit@0.2.0
         with:
           args: run --all-files
