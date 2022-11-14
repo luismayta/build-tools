@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 includes:
   changelog: ./provision/task/changelog.yml
@@ -41,6 +41,7 @@ vars:
   PYTHON_VERSION: 3.10.6
   NODE_VERSION: 16.6.1
   GIT_IGNORES: python,node,go,zsh,sonar,terraform,linux
+  DOCKER_PLATFORMS: linux/amd64
   GOLANGCI_VERSION: 1.42.0
   README_FILE: README.md
   GIT_IGNORES_CUSTOM: >-
@@ -67,7 +68,7 @@ tasks:
     silent: true
 
   summary:
-    desc: 'Summary information'
+    desc: "Summary information"
     cmds:
       - echo Go available {{.GO}}
       - echo Python available {{.PYTHON}}
@@ -76,7 +77,7 @@ tasks:
     silent: true
 
   check:
-    desc: 'Check all dependencies'
+    desc: "Check all dependencies"
     deps:
       - python:check
       - changelog:check
