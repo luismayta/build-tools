@@ -100,6 +100,7 @@ tasks:
     desc: Execute prettier files
     cmds:
       - task: prettier:all
+      - task: go:fmt
 
   upgrade:
     run: once
