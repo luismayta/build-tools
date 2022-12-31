@@ -121,6 +121,9 @@ linters:
     - sqlclosecheck
     - structcheck
     - unparam
+    - deadcode
+    - varcheck
+    - asasalint
 
     # Drives todos nuts
     - godox
