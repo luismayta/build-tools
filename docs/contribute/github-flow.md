@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Contributing GithubFlow BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: BuildTools -->
+<!-- Title: Contributing GithubFlow BuildTools -->
+<!-- Label: BuildTools -->
 <!-- Label: Project -->
 <!-- Label: Contributing -->
 <!-- Label: GithubFlow -->

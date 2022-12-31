@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: EnvVars BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: BuildTools -->
+<!-- Title: EnvVars BuildTools -->
+<!-- Label: BuildTools -->
 <!-- Label: Project -->
 <!-- Label: EnvVars -->
 <!-- Include: disclaimer.md -->

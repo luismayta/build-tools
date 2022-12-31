@@ -1,7 +1,7 @@
 <!-- Space: Projects -->
-<!-- Parent: BaseTemplate -->
-<!-- Title: Contributing BaseTemplate -->
-<!-- Label: BaseTemplate -->
+<!-- Parent: BuildTools -->
+<!-- Title: Contributing BuildTools -->
+<!-- Label: BuildTools -->
 <!-- Label: Contributing -->
 <!-- Include: disclaimer.md -->
 <!-- Include: ac:toc -->
